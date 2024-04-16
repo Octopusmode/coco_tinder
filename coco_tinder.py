@@ -79,6 +79,14 @@ if os.path.exists(outPath):
     for saved_image in saved_images:
         saved_ids.append(imgIds.index(int(saved_image.split(".")[0])))
 
+# Проверяем есть ли файл last.txt
+if os.path.exists("last.txt"):
+    with open("last.txt", "r") as f:
+        last = f.read()
+        if last.isdigit():
+            i = int(last)
+            print(f"Resuming from {i}")
+
 while i < count:
     current_masks = []
     # print(f"Image {i+1}/{len(imgIds)}")
@@ -147,5 +155,8 @@ while i < count:
                 saved_ids.remove(i)
             else:
                 print(f"Frame {file_name} not found in saved images")
+    # Сохраняем индекс последнего обработанного изображения
+    with open("last.txt", "w") as f:
+        f.write(str(i))
 
 cv2.destroyAllWindows()
