@@ -6,15 +6,21 @@ from pycocotools.mask import decode
 from pprint import pprint
 import urllib.request
 
+# Загружать изображения из папки или скачивать из интернета
 use_offline = True
 
+# Путь к корневой папке датасета
 dataDir = "/mnt/x/dataset/coco2017"
+# Имя сплита (train2017, val2017)
 dataType = "train2017"
+# Путь к аннотациям
 annFile = f"{dataDir}/raw/instances_{dataType}.json"
+
 
 if use_offline:
     imagesDir = f"{dataDir}/train/data"
 
+# Путь к папке для сохранения изображений и масок
 outPath = "./out"
 
 coco = COCO(annFile)
@@ -111,13 +117,11 @@ while i < count:
         # <right>
         case 83:
             # Проверяем, что это не последний элемент
-            if i < count - 1:
-                i += 1
+            if i < count - 1: i += 1;
         # <left>
         case 81:
             # Проверяем, что это не первый элемент
-            if i > 0:
-                i -= 1
+            if i > 0: i -= 1;
         # <down>
         case 84:
             # Сохраняем текущее изображение в images
