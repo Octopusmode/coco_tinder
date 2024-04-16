@@ -143,6 +143,9 @@ while i < count:
             if os.path.exists(f"{outPath}/labels/{file_name}.txt"):
                 os.remove(f"{outPath}/labels/{file_name}.txt")
             print(f"Frame {file_name} removed")
-            saved_ids.remove(i)
+            if i in saved_ids:
+                saved_ids.remove(i)
+            else:
+                print(f"Frame {file_name} not found in saved images")
 
 cv2.destroyAllWindows()
