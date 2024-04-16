@@ -71,6 +71,8 @@ i = 0
 class_id = 0
 saved_ids = []
 
+cv2.namedWindow("Image", cv2.WINDOW_NORMAL)
+
 # Получить список сохраненных изображений
 if os.path.exists(outPath):
     saved_images = os.listdir(f"{outPath}/images")
