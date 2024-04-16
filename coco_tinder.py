@@ -103,7 +103,11 @@ while i < count:
     annIds = coco.getAnnIds(imgIds=img["id"], catIds=catIds, iscrowd=None)
     anns = coco.loadAnns(annIds)
     for n, seg in enumerate(anns):
-        mask = seg["segmentation"][0]
+        try:
+            mask = seg["segmentation"][0]
+        except KeyError:
+            i += 1
+            continue
         poly = get_poly(mask)
         I = draw_mask(I, poly, n+1)
         yolo_poly = poly2yolo(poly, img_shape)
