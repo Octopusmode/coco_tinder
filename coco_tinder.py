@@ -94,6 +94,7 @@ while i < count:
     file_name = ".".join(img["file_name"].split(".")[:-1])
     if use_offline:
         I = cv2.imread(f"{imagesDir}/{file_name}.jpg")
+        raw_image = I.copy()
     else:
         url = img["coco_url"]
         resp = urllib.request.urlopen(url)
@@ -139,7 +140,7 @@ while i < count:
         # <down>
         case 84:
             # Сохраняем текущее изображение в images
-            cv2.imwrite(f"{outPath}/images/{file_name}.jpg", I)
+            cv2.imwrite(f"{outPath}/images/{file_name}.jpg", raw_image)
             # Сохраняем текущие маски в labels
             with open(f"{outPath}/labels/{file_name}.txt", "w") as f:
                 for mask in current_masks:
